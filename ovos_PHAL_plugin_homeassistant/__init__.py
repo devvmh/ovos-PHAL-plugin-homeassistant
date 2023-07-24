@@ -131,21 +131,22 @@ class HomeAssistantPlugin(PHALPlugin):
         return self.config.get("search_confidence_threshold", 0.5)
 
 # SETUP INSTANCE SUPPORT
-    def validate_instance_connection(self, host, api_key):
+    def validate_instance_connection(self, host, api_key, assist_only):
         """ Validate the connection to the Home Assistant instance
 
             Args:
                 host (str): The Home Assistant instance URL
                 api_key (str): The Home Assistant API key
+                assist_only (bool): Whether to only pull entities exposed to Assist. Default True
 
             Returns:
                 bool: True if the connection is valid, False otherwise
         """
         try:
             if self.use_ws:
-                validator = HomeAssistantWSConnector(host, api_key)
+                validator = HomeAssistantWSConnector(host, api_key, assist_only)
             else:
-                validator = HomeAssistantRESTConnector(host, api_key)
+                validator = HomeAssistantRESTConnector(host, api_key, assist_only)
 
             validator.get_all_devices()
 
@@ -167,12 +168,13 @@ class HomeAssistantPlugin(PHALPlugin):
         """
         host = message.data.get("url", "")
         key = message.data.get("api_key", "")
+        assist_only = message.data.get("assist_only", True)
 
         if host and key:
             if host.startswith("ws") or host.startswith("wss"):
                 self.use_ws = True
 
-            if self.validate_instance_connection(host, key):
+            if self.validate_instance_connection(host, key, assist_only):
                 self.config["host"] = host
                 self.config["api_key"] = key
                 self.instance_available = True
@@ -193,6 +195,7 @@ class HomeAssistantPlugin(PHALPlugin):
         """ Initialize instance configuration """
         configuration_host = self.config.get("host", "")
         configuration_api_key = self.config.get("api_key", "")
+        configuration_assist_only = self.config.get("assist_only", True)
         if configuration_host.startswith("ws") or configuration_host.startswith("wss"):
             self.use_ws = True
 
@@ -202,9 +205,17 @@ class HomeAssistantPlugin(PHALPlugin):
         if configuration_host != "" and configuration_api_key != "":
             self.instance_available = True
             if self.use_ws:
-                self.connector = HomeAssistantWSConnector(configuration_host, configuration_api_key)
+                self.connector = HomeAssistantWSConnector(
+                    configuration_host,
+                    configuration_api_key,
+                    configuration_assist_only
+                )
             else:
-                self.connector = HomeAssistantRESTConnector(configuration_host, configuration_api_key)
+                self.connector = HomeAssistantRESTConnector(
+                    configuration_host,
+                    configuration_api_key,
+                    configuration_assist_only
+                )
             self.devices = self.connector.get_all_devices()
             self.registered_devices = []
             self.build_devices()
@@ -364,7 +375,6 @@ class HomeAssistantPlugin(PHALPlugin):
 
         # Device ID not provided, usually VUI
         device = message.data.get("device")
-        device_result = match_one(device, self.registered_device_names)
         device_result = self.fuzzy_match_name(
                             self.registered_devices,
                             device,
@@ -606,7 +616,7 @@ class HomeAssistantPlugin(PHALPlugin):
         display_list_model = []
         for device in self.registered_devices:
             display_list_model.append(device.get_device_display_model())
-        self.bus.emit(message.response(data=display_list_model))
+        self.bus.emit(message.response(data=display_list_model))  # TODO: Fix type, this may be causing GUI problems
 
     def handle_assist_message(self, message):
         """Handle a passthrough message to Home Assistant's Assist API.
@@ -720,7 +730,7 @@ class HomeAssistantPlugin(PHALPlugin):
         """
         group_settings = message.data.get("use_group_display", None)
         if group_settings is not None:
-            if group_settings == True:
+            if group_settings is True:
                 use_group_display = True
                 self.config["use_group_display"] = use_group_display
             else:
@@ -822,7 +832,7 @@ class HomeAssistantPlugin(PHALPlugin):
         It can request a new display model once it receives this signal.
 
         Args:
-            device (dict): The device that was updated.
+            device_id (dict): The device that was updated.
         """
         # GUI only event as we don't want to flood the GUI bus
         self.gui.send_event("ovos.phal.plugin.homeassistant.device.updated", {"device_id": device_id})
