@@ -1,47 +1,13 @@
 # Changelog
 
-## [0.0.3a4](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-homeassistant/tree/0.0.3a4) (2023-06-23)
+## [0.0.4a1](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-homeassistant/tree/0.0.4a1) (2023-08-29)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-homeassistant/compare/0.0.3a3...0.0.3a4)
-
-**Merged pull requests:**
-
-- setup.py fixes and updates [\#35](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-homeassistant/pull/35) ([NeonDaniel](https://github.com/NeonDaniel))
-
-## [0.0.3a3](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-homeassistant/tree/0.0.3a3) (2023-06-23)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-homeassistant/compare/V0.0.3a2...0.0.3a3)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-homeassistant/compare/0.0.3...0.0.4a1)
 
 **Merged pull requests:**
 
-- feat: adjustable search confidence threshold [\#34](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-homeassistant/pull/34) ([mikejgray](https://github.com/mikejgray))
-- Update automation to shared actions [\#33](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-homeassistant/pull/33) ([NeonDaniel](https://github.com/NeonDaniel))
-
-## [V0.0.3a2](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-homeassistant/tree/V0.0.3a2) (2023-06-20)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-homeassistant/compare/V0.0.3a1...V0.0.3a2)
-
-**Implemented enhancements:**
-
-- Configurable default brightness increment [\#21](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-homeassistant/issues/21)
-
-**Fixed bugs:**
-
-- \[BUG\] Normalize user-inputted URL for HomeAssistant [\#30](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-homeassistant/issues/30)
-- \[BUG\] Fuzzy match doesn't handle underscores well [\#28](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-homeassistant/issues/28)
-- Connection error [\#14](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-homeassistant/issues/14)
-
-**Merged pull requests:**
-
-- V0.0.3 alpha improvements [\#32](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-homeassistant/pull/32) ([mikejgray](https://github.com/mikejgray))
-
-## [V0.0.3a1](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-homeassistant/tree/V0.0.3a1) (2023-06-10)
-
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-homeassistant/compare/V0.0.2...V0.0.3a1)
-
-**Merged pull requests:**
-
-- Pass configuration to GUIInterface [\#27](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-homeassistant/pull/27) ([NeonDaniel](https://github.com/NeonDaniel))
+- feat: bus response to check for HA connection [\#41](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-homeassistant/pull/41) ([mikejgray](https://github.com/mikejgray))
+- 0.0.3 [\#36](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-homeassistant/pull/36) ([github-actions[bot]](https://github.com/apps/github-actions))
 
 
 
