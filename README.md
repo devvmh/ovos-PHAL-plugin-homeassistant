@@ -4,6 +4,8 @@ The PHAL Plugin provides GUI interfaces and API for Home Assistant Instants.
 
 NOTE: this plugin is roadmapped for merging with https://github.com/OpenVoiceOS/ovos-PHAL-plugin-commonIOT for ovos-core release 0.0.9, the UI will become IOT framework agnostic
 
+To interact with the plugin with your voice, you will also need a plugin like https://github.com/mikejgray/neon-homeassistant-skill
+
 # Demo GIF
 
 ![HomeAssistant PHAL Demo](demo/demo.gif)
@@ -45,7 +47,7 @@ Plugin Supports Two Configuration Methods:
    - Enter the Long-Lived Access Token (API KEY)
    - Press the "Confirm" button
 
-2. Manually Editing the Config File
+2. Manually Editing the [Config File](https://openvoiceos.github.io/community-docs/config/)
    - Add the following to the config file:
    ```json
         "PHAL": {
