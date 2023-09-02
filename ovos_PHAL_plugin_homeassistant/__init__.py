@@ -246,10 +246,10 @@ class HomeAssistantPlugin(PHALPlugin):
                     device_icon = f"mdi:{device_type}"
                     device_state = device.get("state", None)
                     device_area = device.get("area_id", None)
-                    LOG.debug(f"Device added: {device_name} - {device_type} - {device_area}")
 
                     device_attributes = device.get("attributes", {})
                     if device_type in self.device_types:
+                        LOG.debug(f"Device added: {device_name} - {device_type} - {device_area}")
                         self.registered_devices.append(self.device_types[device_type](
                             self.connector, device_id, device_icon, device_name,
                             device_state, device_attributes, device_area, self.device_updated))
